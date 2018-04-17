@@ -16,7 +16,6 @@ public class Loader {
 
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
-        System.out.println("coucou");
 
         descripteursAutorun = chargementDescripteursAutorun();
 
@@ -25,19 +24,19 @@ public class Loader {
             mesAutorun.add(lancementAutorun(descripteurAutorun));
         }
 
+        //menu affichage des plugins dispo
         System.out.println("Mes plugin disponibles :");
-        for(Class maClass : mesAutorun){
-            System.out.println(maClass.getName());
+        for (int i = 0; i < mesAutorun.size() ; i++) {
+            System.out.println(i + " -0 " + mesAutorun.get(i).getName());
         }
 
+        //lecture des entrée clavier
         Scanner scanner = new Scanner(System.in);
         int choix = scanner.nextInt();
 
         //appel du constructeur.
         mesAutorun.get(choix).newInstance();
 
-
-        //lancement de mon pllugin quand je veux
     }
 
     /**
