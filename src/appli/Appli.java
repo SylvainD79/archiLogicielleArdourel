@@ -34,7 +34,4 @@ public class Appli {
         this.afficheurConsoleInterface.affiche(s);
     }
 
-    public static void main(String[] args) {
-        Appli appli = new Appli();
-    }
 }
