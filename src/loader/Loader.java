@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Properties;
 
 public class Loader {
+
+    /**
+     * Classe de chargement du fichier des properties permettant de d'obtenir l'ensemble des descripteurs
+     * @return
+     */
     public static List<DescripteurPlugin> envoiDescripteurs() {
         Properties props = new Properties();
         List<DescripteurPlugin> descripteurPluginList = new ArrayList<>();
@@ -27,6 +32,11 @@ public class Loader {
         }
     }
 
+    /**
+     * Renvoie le plugin (l'afficheur) en fonction du choix
+     * @param choix
+     * @return
+     */
     public static Object donnePlugin(DescripteurPlugin choix) {
         Properties props = new Properties();
         Object o = null;
