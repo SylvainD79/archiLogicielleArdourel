@@ -4,19 +4,37 @@ import appli.interfaces.AfficheurConsoleInterface;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 public class Loader {
-    public static Object donnePlugin(String key, Class<?> interf) {
+    public static List<DescripteurPlugin> envoiDescripteurs() {
+        Properties props = new Properties();
+        List<DescripteurPlugin> descripteurPluginList = new ArrayList<>();
+        try {
+            props.load(new FileReader("file.properties"));
+            List<String> availablePlugin = Arrays.asList(props.getProperty("class").split(","));
+            for(String s : availablePlugin) {
+                descripteurPluginList.add(new DescripteurPlugin(s));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return descripteurPluginList;
+        }
+    }
+
+    public static Object donnePlugin(DescripteurPlugin choix) {
         Properties props = new Properties();
         Object o = null;
         try {
             props.load(new FileReader("file.properties"));
-            Class<?> cl = Class.forName(props.getProperty(key));
+            Class<?> cl = Class.forName(choix.getNomClasse());
             //Vérifie si la classe cl est un super type de AfficheurConsoleInterface
-            if(interf.isAssignableFrom(cl)) {
-                o = cl.newInstance();
-            }
+            o = cl.newInstance();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
